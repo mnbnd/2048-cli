@@ -1,3 +1,7 @@
+// Jacob Yuill, John Sievertsen
+// 2048 Game 11/23/24
+// This file is responsible for declaring and defining the member functions of the Board class.
+// The functions include most of the game logic, such as moving tiles, checking for a win or loss, and adding random tiles.
 #ifndef BOARD_H
 #define BOARD_H
 
