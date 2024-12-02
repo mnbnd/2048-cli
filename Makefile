@@ -20,13 +20,13 @@ all: $(TARGET)
 
 # Build the target executable
 $(TARGET): $(OBJS)
-$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
 # Compile source files into object files
 %.o: %.cpp board.h Node.h
-$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Clean up generated files
 clean:
-rm -f $(TARGET) $(OBJS)
+	rm -f $(TARGET) $(OBJS)
 
