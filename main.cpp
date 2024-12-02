@@ -5,7 +5,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include "board.h"
+#include "Board.h"
 
 using namespace std;
 
