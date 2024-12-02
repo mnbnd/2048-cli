@@ -1,3 +1,7 @@
+// Jacob Yuill, John Sievertsen
+// 2048 Game 11/21/24
+// This program runs the main game loop for the 2048 program.
+// It will continue to run until the user decides to quit or the game is finished (Win or Loss condition). 
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -21,7 +25,7 @@ void playGame() {
     }
     cout << "Enter move (W,A,S,D): ";
     cin >> input;
-    bool moved = board.move(input);
+    bool moved = board.move(input); // Move the tiles
     if (moved) {
       board.addRandomTile();
     } else {
@@ -31,7 +35,7 @@ void playGame() {
 }
 
 int main() {
-  srand(static_cast<unsigned int>(time(0)));
+  srand(static_cast<unsigned int>(time(0))); // Seed the random number generator for the board
   char choice;
   do {
     playGame();
