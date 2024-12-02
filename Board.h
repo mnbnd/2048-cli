@@ -114,10 +114,10 @@ void Board::addRandomTile() {
   int r = rand() % emptyCells;
   int count = 0;
   for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 4; j++) {
-      if (grid[i][j]->value == 0) {
-        if (count == r) {
-          int randValue = rand() % 10;
+    for (int j = 0; j < 4; j++) { // for each cell
+      if (grid[i][j]->value == 0) { // if cell is empty
+        if (count == r) { // and we've reached the randomly selected empty cell
+          int randValue = rand() % 10; // theres a 10% chance of 4, and a 90% chance of 2 being generated
             if (randValue == 0) {
               grid[i][j]->value = 4;
             } else {
