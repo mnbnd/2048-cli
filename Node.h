@@ -10,7 +10,7 @@ public:
   Node* left;
   Node* right;
 
-  Node(int val = 0);
+  Node(int val = 0); //initializes value of constructor
 };
 
 Node::Node(int val) {
