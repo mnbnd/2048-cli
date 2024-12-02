@@ -1,6 +1,6 @@
 // Jacob Yuill, John Sievertsen
 // 2048 Game 11/21/24
-// This program runs the main game loop for the 2048 program.
+// This file runs the main game loop for the 2048 program.
 // It will continue to run until the user decides to quit or the game is finished (Win or Loss condition). 
 #include <iostream>
 #include <cstdlib>
