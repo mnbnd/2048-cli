@@ -71,54 +71,60 @@ Board::~Board() {
 }
 
 void Board::initialize() {
-    // Add two initial tiles
-    addRandomTile();
-    addRandomTile();
+  // Add two initial tiles
+  addRandomTile();
+  addRandomTile();
 }
 
 void Board::printBoard() {
-    // Print the board to the console
-    cout << "-----------------------------\n";
-    for (int i = 0; i < 4; i++) {
-        cout << "|";
-        for (int j = 0; j < 4; j++) {
-            if (grid[i][j]->value != 0)
-                printf("%4d |", grid[i][j]->value);
-            else
-                printf("     |");
-        }
-        cout << "\n-----------------------------\n";
+  // Print the board to the console
+  cout << "-------------------------\n";
+  for (int i = 0; i < 4; i++) {
+    cout << "|";
+    for (int j = 0; j < 4; j++) {
+      if (grid[i][j]->value != 0) {
+        printf("%4d |", grid[i][j]->value);
+      } else {
+        printf("     |");
+      }
     }
+    cout << "\n-------------------------\n";
+  }
 }
 
 void Board::addRandomTile() {
-    // Add a random tile (2 or 4) to an empty spot
-    int emptyCells = 0;
-    for (int i = 0; i < 4; i++)
-        for (int j = 0; j < 4; j++)
-            if (grid[i][j]->value == 0)
-                emptyCells++;
-
-    if (emptyCells == 0)
-        return;
-
-    int r = rand() % emptyCells;
-    int count = 0;
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
-            if (grid[i][j]->value == 0) {
-                if (count == r) {
-                    int randValue = rand() % 10;
-                    if (randValue == 0)
-                        grid[i][j]->value = 4;
-                    else
-                        grid[i][j]->value = 2;
-                    return;
-                }
-                count++;
-            }
-        }
+  // Add a random tile (2 or 4) to an empty spot
+  int emptyCells = 0;
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 4; j++) {
+      if (grid[i][j]->value == 0) {
+        emptyCells++;
+      }
     }
+  }
+
+  if (emptyCells == 0) {
+    return;
+  }
+
+  int r = rand() % emptyCells;
+  int count = 0;
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 4; j++) {
+      if (grid[i][j]->value == 0) {
+        if (count == r) {
+          int randValue = rand() % 10;
+            if (randValue == 0) {
+              grid[i][j]->value = 4;
+            } else {
+              grid[i][j]->value = 2;
+            }
+            return;
+        }
+        count++;
+      }
+    }
+  }
 }
 
 bool Board::move(char direction) {
@@ -228,35 +234,43 @@ bool Board::move(char direction) {
 }
 
 bool Board::canMove() {
-    // Check if any moves are possible
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
-            if (grid[i][j]->value == 0)
-                return true;
-            if (i > 0 && grid[i][j]->value == grid[i - 1][j]->value)
-                return true;
-            if (i < 3 && grid[i][j]->value == grid[i + 1][j]->value)
-                return true;
-            if (j > 0 && grid[i][j]->value == grid[i][j - 1]->value)
-                return true;
-            if (j < 3 && grid[i][j]->value == grid[i][j + 1]->value)
-                return true;
-        }
+  // Check if any moves are possible
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 4; j++) {
+      if (grid[i][j]->value == 0) {
+        return true;
+      }
+      if (i > 0 && grid[i][j]->value == grid[i - 1][j]->value) {
+        return true;
+      }
+      if (i < 3 && grid[i][j]->value == grid[i + 1][j]->value) {
+        return true;
+      }
+      if (j > 0 && grid[i][j]->value == grid[i][j - 1]->value) {
+        return true;
+      }
+      if (j < 3 && grid[i][j]->value == grid[i][j + 1]->value) {
+        return true;
+      }
     }
-    return false;
+  }
+  return false;
 }
 
 bool Board::isGameOver() {
-    return !canMove();
+  return !canMove();
 }
 
 bool Board::hasWon() {
-    // Check if any tile is 2048
-    for (int i = 0; i < 4; i++)
-        for (int j = 0; j < 4; j++)
-            if (grid[i][j]->value == 2048)
-                return true;
-    return false;
+  // Check if any tile is 2048
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 4; j++) {
+      if (grid[i][j]->value == 2048) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
 
 #endif // BOARD_H
