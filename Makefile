@@ -1,21 +1,12 @@
-CXX = g++
+CXX=		g++
+CXXFLAGS=	-g -Wall -std=gnu++11
+SHELL=		bash
 
-CXXFLAGS = -Wall -std=c++11
+all:		2048
 
-TARGET = game
-
-SRCS = main.cpp
-
-OBJS = $(SRCS:.cpp=.o)
-
-all: $(TARGET)
-
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
-
-%.o: %.cpp board.h Node.h
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+2048:		main.cpp Board.h Node.h
+	$(CXX) $(CXXFLAGS) -o $@ main.cpp
 
 clean:
-	rm -f $(TARGET) $(OBJS)
+	rm -f 2048
 
