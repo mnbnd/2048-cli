@@ -114,7 +114,6 @@ void Board::addRandomTile() {
   int r = rand() % emptyCells;
   int count = 0;
   for (int i = 0; i < 4; i++) {
-<<<<<<< HEAD
     for (int j = 0; j < 4; j++) { // for each cell
       if (grid[i][j]->value == 0) { // if cell is empty
         if (count == r) { // and we've reached the randomly selected empty cell
@@ -125,18 +124,6 @@ void Board::addRandomTile() {
               grid[i][j]->value = 2;
             }
             return;
-=======
-    for (int j = 0; j < 4; j++) {
-      if (grid[i][j]->value == 0) {
-        if (count == r) {
-          int randValue = rand() % 10;
-          if (randValue == 0) {
-            grid[i][j]->value = 4;
-          } else {
-            grid[i][j]->value = 2;
-          }
-          return;
->>>>>>> 6ee2a55b63e45cf329344182d2ca70a8129dfc45
         }
         count++;
       }
