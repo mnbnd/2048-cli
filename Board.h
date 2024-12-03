@@ -118,12 +118,12 @@ void Board::addRandomTile() {
       if (grid[i][j]->value == 0) { // if cell is empty
         if (count == r) { // and we've reached the randomly selected empty cell
           int randValue = rand() % 10; // theres a 10% chance of 4, and a 90% chance of 2 being generated
-            if (randValue == 0) {
-              grid[i][j]->value = 4;
-            } else {
-              grid[i][j]->value = 2;
-            }
-            return;
+          if (randValue == 0) {
+            grid[i][j]->value = 4;
+          } else {
+            grid[i][j]->value = 2;
+          }
+          return;
         }
         count++;
       }
@@ -132,109 +132,109 @@ void Board::addRandomTile() {
 }
 
 bool Board::move(char direction) {
-    bool moved = false;
-    bool merged[4][4] = { false };
+  bool moved = false;
+  bool merged[4][4] = { false };
 
-    switch (direction) {
+  switch (direction) {
+   
+    //up
     case 'w':
     case 'W':
-        // Move up
-        for (int j = 0; j < 4; j++) {
-            for (int i = 1; i < 4; i++) {
-                if (grid[i][j]->value != 0) {
-                    int k = i;
-                    while (k > 0 && grid[k - 1][j]->value == 0) {
-                        grid[k - 1][j]->value = grid[k][j]->value;
-                        grid[k][j]->value = 0;
-                        k--;
-                        moved = true;
-                    }
-                    if (k > 0 && grid[k - 1][j]->value == grid[k][j]->value && !merged[k - 1][j]) {
-                        grid[k - 1][j]->value *= 2;
-                        grid[k][j]->value = 0;
-                        merged[k - 1][j] = true;
-                        moved = true;
-                    }
-                }
+      for (int j = 0; j < 4; j++) { //check each column
+        for (int i = 1; i < 4; i++) { //check row below
+          if (grid[i][j]->value != 0) { //non empty tile
+            int k = i;
+            while (k > 0 && grid[k - 1][j]->value == 0) { //handles movement of tiles before merging
+              grid[k - 1][j]->value = grid[k][j]->value; //move current val up 
+              grid[k][j]->value = 0;			 //remove initial position	
+              k--;					 //move up position	
+              moved = true;
             }
+            if (k > 0 && grid[k - 1][j]->value == grid[k][j]->value && !merged[k - 1][j]) {
+              grid[k - 1][j]->value *= 2; //double destination tile
+              grid[k][j]->value = 0;      //make original tile empty
+              merged[k - 1][j] = true;
+              moved = true;
+            }
+          }
         }
-        break;
+      }
+      break;
+    //down
     case 's':
     case 'S':
-        // Move down
-        for (int j = 0; j < 4; j++) {
-            for (int i = 2; i >= 0; i--) {
-                if (grid[i][j]->value != 0) {
-                    int k = i;
-                    while (k < 3 && grid[k + 1][j]->value == 0) {
-                        grid[k + 1][j]->value = grid[k][j]->value;
-                        grid[k][j]->value = 0;
-                        k++;
-                        moved = true;
-                    }
-                    if (k < 3 && grid[k + 1][j]->value == grid[k][j]->value && !merged[k + 1][j]) {
-                        grid[k + 1][j]->value *= 2;
-                        grid[k][j]->value = 0;
-                        merged[k + 1][j] = true;
-                        moved = true;
-                    }
-                }
+      for (int j = 0; j < 4; j++) {
+        for (int i = 2; i >= 0; i--) {
+          if (grid[i][j]->value != 0) {
+            int k = i;
+            while (k < 3 && grid[k + 1][j]->value == 0) {
+              grid[k + 1][j]->value = grid[k][j]->value;
+              grid[k][j]->value = 0;
+              k++;
+              moved = true;
             }
-        }
-        break;
-    case 'a':
-    case 'A':
-        // Move left
-        for (int i = 0; i < 4; i++) {
-            for (int j = 1; j < 4; j++) {
-                if (grid[i][j]->value != 0) {
-                    int k = j;
-                    while (k > 0 && grid[i][k - 1]->value == 0) {
-                        grid[i][k - 1]->value = grid[i][k]->value;
-                        grid[i][k]->value = 0;
-                        k--;
-                        moved = true;
-                    }
-                    if (k > 0 && grid[i][k - 1]->value == grid[i][k]->value && !merged[i][k - 1]) {
-                        grid[i][k - 1]->value *= 2;
-                        grid[i][k]->value = 0;
-                        merged[i][k - 1] = true;
-                        moved = true;
-                    }
-                }
+            if (k < 3 && grid[k + 1][j]->value == grid[k][j]->value && !merged[k + 1][j]) {
+              grid[k + 1][j]->value *= 2;
+              grid[k][j]->value = 0;
+              merged[k + 1][j] = true;
+              moved = true;
             }
+          }
         }
-        break;
+      }
+      break;
+   //left
+   case 'a':
+   case 'A':
+      for (int i = 0; i < 4; i++) { //check each column
+        for (int j = 1; j < 4; j++) { //check row left
+          if (grid[i][j]->value != 0) { //non empty tile
+            int k = j;
+            while (k > 0 && grid[i][k - 1]->value == 0) { //handles movement of tiles before merging
+              grid[i][k - 1]->value = grid[i][k]->value; //move current val up 
+              grid[i][k]->value = 0; //remove initial position
+              k--;                   //move up position
+              moved = true; 
+            }
+            if (k > 0 && grid[i][k - 1]->value == grid[i][k]->value && !merged[i][k - 1]) { //check if both tiles are equal to each other and hasn't merged this turn
+              grid[i][k - 1]->value *= 2; //double destination tile
+              grid[i][k]->value = 0; //make original tile empty
+              merged[i][k-1] = true;
+              moved = true;
+            }
+          }
+        }
+      }
+      break;
+    //right
     case 'd':
     case 'D':
-        // Move right
-        for (int i = 0; i < 4; i++) {
-            for (int j = 2; j >= 0; j--) {
-                if (grid[i][j]->value != 0) {
-                    int k = j;
-                    while (k < 3 && grid[i][k + 1]->value == 0) {
-                        grid[i][k + 1]->value = grid[i][k]->value;
-                        grid[i][k]->value = 0;
-                        k++;
-                        moved = true;
-                    }
-                    if (k < 3 && grid[i][k + 1]->value == grid[i][k]->value && !merged[i][k + 1]) {
-                        grid[i][k + 1]->value *= 2;
-                        grid[i][k]->value = 0;
-                        merged[i][k + 1] = true;
-                        moved = true;
-                    }
-                }
+      for (int i = 0; i < 4; i++) {
+        for (int j = 2; j >= 0; j--) {
+          if (grid[i][j]->value != 0) {
+            int k = j;
+            while (k < 3 && grid[i][k + 1]->value == 0) {
+              grid[i][k+1]->value = grid[i][k]->value;
+              grid[i][k]->value = 0;
+              k++;
+              moved = true;
             }
+            if (k < 3 && grid[i][k + 1]->value == grid[i][k]->value && !merged[i][k+1]) {
+              grid[i][k+1]->value *= 2;
+              grid[i][k]->value = 0;
+              merged[i][k+1] = true;
+              moved = true;
+            }
+          }
         }
-        break;
+      }
+      break;
     default:
-        // Invalid input
-        cout << "Invalid input. Please enter W, A, S, or D.\n";
-        break;
-    }
+      cout << "Invalid input. Please enter W, A, S, or D." << endl;
+      break;
+  }
 
-    return moved;
+  return moved;
 }
 
 bool Board::canMove() {
