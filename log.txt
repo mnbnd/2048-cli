@@ -1,0 +1,9 @@
+Jacob
+
+30 minutes - Review concepts and code from previous labs (tictactoe and linked list lab in order to further concept of how 2048 game could work combining these two elements)
+
+30 minutes - begin outlining structure of lab, decide on using header files and a main.cpp like other COSC labs, as well as makefile to ease compilation
+
+1 hour - Plan out and finish Node.h after trial and error. What resulted is a linked list with 4 possible connections in order to link data efficiently. This went through many prototypes, but we decided that this new more-than-circular linked list proved to be the most efficient when tracking each direction is nessecary.
+
+
