@@ -2,11 +2,8 @@
 // 2048 Game 11/23/24
 // This file is responsible for declaring and defining the member functions of the Board class.
 // The functions include most of the game logic, such as moving tiles, checking for a win or loss, and adding random tiles.
-#ifndef BOARD_H
-#define BOARD_H
-
 #include <iostream>
-#include <cstdlib>
+#include <cstdlib> //for srand
 #include <ctime>
 #include "Node.h"
 
@@ -136,7 +133,6 @@ bool Board::move(char direction) {
   bool merged[4][4] = { false };
 
   switch (direction) {
-   
     //up
     case 'w':
     case 'W':
@@ -144,13 +140,13 @@ bool Board::move(char direction) {
         for (int i = 1; i < 4; i++) { //check row below
           if (grid[i][j]->value != 0) { //non empty tile
             int k = i;
-            while (k > 0 && grid[k - 1][j]->value == 0) { //handles movement of tiles before merging
+            while (k > 0 && grid[k-1][j]->value == 0) { //handles movement of tiles before merging
               grid[k - 1][j]->value = grid[k][j]->value; //move current val up 
               grid[k][j]->value = 0;			 //remove initial position	
-              k--;					 //move up position	
+              k--;					               //move up position	
               moved = true;
             }
-            if (k > 0 && grid[k - 1][j]->value == grid[k][j]->value && !merged[k - 1][j]) {
+            if (k > 0 && grid[k-1][j]->value == grid[k][j]->value && !merged[k-1][j]) { //check if both tiles are euqal to eachother, and hasn't already merged
               grid[k - 1][j]->value *= 2; //double destination tile
               grid[k][j]->value = 0;      //make original tile empty
               merged[k - 1][j] = true;
@@ -164,17 +160,17 @@ bool Board::move(char direction) {
     case 's':
     case 'S':
       for (int j = 0; j < 4; j++) {
-        for (int i = 2; i >= 0; i--) {
+        for (int i = 2; i >= 0; i--) { //check row above
           if (grid[i][j]->value != 0) {
             int k = i;
             while (k < 3 && grid[k + 1][j]->value == 0) {
-              grid[k + 1][j]->value = grid[k][j]->value;
+              grid[k+1][j]->value = grid[k][j]->value;
               grid[k][j]->value = 0;
               k++;
               moved = true;
             }
             if (k < 3 && grid[k + 1][j]->value == grid[k][j]->value && !merged[k + 1][j]) {
-              grid[k + 1][j]->value *= 2;
+              grid[k+1][j]->value *= 2;
               grid[k][j]->value = 0;
               merged[k + 1][j] = true;
               moved = true;
@@ -190,14 +186,14 @@ bool Board::move(char direction) {
         for (int j = 1; j < 4; j++) { //check row left
           if (grid[i][j]->value != 0) { //non empty tile
             int k = j;
-            while (k > 0 && grid[i][k - 1]->value == 0) { //handles movement of tiles before merging
-              grid[i][k - 1]->value = grid[i][k]->value; //move current val up 
+            while (k > 0 && grid[i][k-1]->value == 0) { //handles movement of tiles before merging
+              grid[i][k-1]->value = grid[i][k]->value; //move current val up 
               grid[i][k]->value = 0; //remove initial position
               k--;                   //move up position
               moved = true; 
             }
-            if (k > 0 && grid[i][k - 1]->value == grid[i][k]->value && !merged[i][k - 1]) { //check if both tiles are equal to each other and hasn't merged this turn
-              grid[i][k - 1]->value *= 2; //double destination tile
+            if (k > 0 && grid[i][k-1]->value == grid[i][k]->value && !merged[i][k - 1]) { //check if both tiles are equal to each other and hasn't merged this turn
+              grid[i][k-1]->value *= 2; //double destination tile
               grid[i][k]->value = 0; //make original tile empty
               merged[i][k-1] = true;
               moved = true;
@@ -213,13 +209,13 @@ bool Board::move(char direction) {
         for (int j = 2; j >= 0; j--) {
           if (grid[i][j]->value != 0) {
             int k = j;
-            while (k < 3 && grid[i][k + 1]->value == 0) {
+            while (k < 3 && grid[i][k+1]->value == 0) {
               grid[i][k+1]->value = grid[i][k]->value;
               grid[i][k]->value = 0;
               k++;
               moved = true;
             }
-            if (k < 3 && grid[i][k + 1]->value == grid[i][k]->value && !merged[i][k+1]) {
+            if (k < 3 && grid[i][k+1]->value == grid[i][k]->value && !merged[i][k+1]) {
               grid[i][k+1]->value *= 2;
               grid[i][k]->value = 0;
               merged[i][k+1] = true;
@@ -230,7 +226,7 @@ bool Board::move(char direction) {
       }
       break;
     default:
-      cout << "Invalid input. Please enter W, A, S, or D." << endl;
+      cout << "Invalid input. Use [W A S D]" << endl;
       break;
   }
 
@@ -276,5 +272,3 @@ bool Board::hasWon() {
   }
   return false;
 }
-
-#endif // BOARD_H

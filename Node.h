@@ -6,7 +6,7 @@
 
 using namespace std;
 
-class Node {
+class Node { //this is a linked list design where it has values branching out in all 4 directions
 public:
   int value;
   Node* up;
