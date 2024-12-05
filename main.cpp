@@ -20,7 +20,7 @@ void playGame() {
       break;
     }
     if (board.isGameOver()) {
-      cout << "Game Over! No more moves possible.\n";
+      cout << "Game over! No more moves possible.\n";
       break;
     }
     cout << "Enter move [W A S D]: ";
@@ -37,7 +37,7 @@ void playGame() {
 int main() {
   srand(static_cast<unsigned int>(time(0))); //seed board RNG
   char choice;
-  do { //run game at least once, do while for continuity 
+  do { //run game at least once = use do while loop 
     playGame();
     cout << "Do you want to start a new game? (Y/N): ";
     cin >> choice;
