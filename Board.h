@@ -101,7 +101,7 @@ void Board::addRandomTile() {
     }
   }
 
-  if (emptyCells == 0) {
+  if (emptyCells == 0) { //dont add anything if board is full
     return;
   }
 
@@ -225,7 +225,7 @@ bool Board::move(char direction) {
         }
       }
       break;
-    default:
+    default: //if no good input found
       cout << "Invalid input. Use [W A S D]" << endl;
       break;
   }
