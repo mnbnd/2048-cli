@@ -1,0 +1,5 @@
+overall I would say the project went well. We did have a group member disappear, but it honestly didn't affect our progress at all, and maybe made it easier for just the two of us to do it. We split up work and communicated well, reaching our own deadlines fairly efficiently. Despite the amount of time we had to work on the project, we did just finish this over the course of a couple days. Even then, I feel like we did a good job.
+
+This was the first group coding project that both of us have done in our time at UTK, and it was a great experience, and something we will definetly have to get used to if we plan to work as software engineers. Working as a team isn't the most fun, but it is rewarding for multiple people to contribute their perspectives to one project.
+
+I feel that our group should get the discrentionary points as we clearly utlized knowledge from 202 in this class, with both OOP in the form of header files and also the usage of the linked list data structure. While not being original, our game does work and I think it is well polished for the scope of the project.
