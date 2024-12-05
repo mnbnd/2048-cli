@@ -234,7 +234,8 @@ bool Board::move(char direction) {
 }
 
 bool Board::canMove() {
-  // Check if any moves are possible
+  //loop whole board and check if the values equal one another at each section AND that is it is not on a corner
+  //do this for each direction, and if at least one move is found, then return true
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 4; j++) {
       if (grid[i][j]->value == 0) {
@@ -246,7 +247,7 @@ bool Board::canMove() {
       if (i < 3 && grid[i][j]->value == grid[i + 1][j]->value) {
         return true;
       }
-      if (j > 0 && grid[i][j]->value == grid[i][j - 1]->value) {
+      if (j > 0 && grid[i][j]->value == grid[i][j - 1]->value) { 
         return true;
       }
       if (j < 3 && grid[i][j]->value == grid[i][j + 1]->value) {

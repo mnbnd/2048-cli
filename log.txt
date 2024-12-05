@@ -1,9 +1,44 @@
 Jacob
 
+1 hour - initial meeting. plan out what we want to do and how we wanted to do it - settled on 2048 game despite it not being very original as it had a clear path in mind to be functional and we had an immediate idea on how to actually implement the data structure. Not a lot got done for how long we met so feel free to ignore time worked here
+
 30 minutes - Review concepts and code from previous labs (tictactoe and linked list lab in order to further concept of how 2048 game could work combining these two elements)
 
 30 minutes - begin outlining structure of lab, decide on using header files and a main.cpp like other COSC labs, as well as makefile to ease compilation
 
-1 hour - Plan out and finish Node.h after trial and error. What resulted is a linked list with 4 possible connections in order to link data efficiently. This went through many prototypes, but we decided that this new more-than-circular linked list proved to be the most efficient when tracking each direction is nessecary.
+1 hour - Plan out Node.h. Spent time looking through Plank notes and deliberated on what do to. Decided to do a linked list with "exits" on each cardinal direction.
 
+30 minutes - Implement node.h class - What resulted canb e
 
+2 hours - plan out board structure. This is the stage where we had to fully comprehend what we were actually doing, and we ended up going through multiple iterations to actually do it. We decided which functions we were going to write, with it eventually leading to me writing "move" and canMove funcs. Multiple prototypes were scrapped here, though nothing overall that notable.
+
+3 hours - developed move function. While not that complicated in the end, the whiteboard had to be brought out, thinking of ways I could check for merges before actually moving.
+
+   case 'a':
+   case 'A':
+      for (int i = 0; i < 4; i++) { //check each column
+        for (int j = 1; j < 4; j++) { //check row left
+          if (grid[i][j]->value != 0) { //non empty tile
+            int k = j;
+            while (k > 0 && grid[i][k-1]->value == 0) { //handles movement of tiles before merging
+              grid[i][k-1]->value = grid[i][k]->value; //move current val up 
+              grid[i][k]->value = 0; //remove initial position
+              k--;                   //move up position
+              moved = true; 
+            }
+            if (k > 0 && grid[i][k-1]->value == grid[i][k]->value && !merged[i][k - 1]) { //check if both tiles are equal to each other and hasn't merged this turn
+              grid[i][k-1]->value *= 2; //double destination tile
+              grid[i][k]->value = 0; //make original tile empty
+              merged[i][k-1] = true;
+              moved = true;
+            }
+          }
+        }
+
+The hardest part of this was the logic used to scan each row. I had a hard time visualizing the methods for checking, and while it is the same code repeated 4 times, make sure each edge case with the RNG also placing in new tiles when it was moved. The 2d grid was not easy to work with, which is possibly a way the program could be refined as well. 
+
+15 minutes - develop canMove function. This wasn't that hard for me. Just a simple bounds check 4 times, all within a loop.
+
+10 minutes - consult with John on progress, talk about what we needed to finish
+
+30 minutes - review final program with John and comment out stuff, fix formatting
