@@ -4,7 +4,7 @@
 // The functions include most of the game logic, such as moving tiles, checking for a win or loss, and adding random tiles.
 #include <iostream>
 #include <cstdlib> //for srand
-#include <ctime>
+#include <ctime> //for seeding RNG
 #include "Node.h"
 
 using namespace std;

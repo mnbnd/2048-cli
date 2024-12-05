@@ -4,47 +4,44 @@
 // It will continue to run until the user decides to quit or the game is finished (Win or Loss condition). 
 #include <iostream>
 #include <cstdlib>
-#include <ctime>
+#include <ctime> //for seeding rng
 #include "Board.h"
 
 using namespace std;
 
 void playGame() {
-  Board board;
+  Board board; //new obj
   char input;
 
-  while (true) {
+  while (1) {
     board.printBoard();
     if (board.hasWon()) {
-      cout << "Congratulations! You reached 2048!\n";
+      cout << "You won! You reached 2048!\n";
       break;
     }
     if (board.isGameOver()) {
       cout << "Game Over! No more moves possible.\n";
       break;
     }
-    cout << "Enter move (W,A,S,D): ";
+    cout << "Enter move [W A S D]: ";
     cin >> input;
     bool moved = board.move(input); // Move the tiles
     if (moved) {
       board.addRandomTile();
     } else {
-      cout << "Invalid move. Try again.\n";
+      cout << "Invalid move. Try again." << endl;
     }
   }
 }
 
 int main() {
-  srand(static_cast<unsigned int>(time(0))); // Seed the random number generator for the board
+  srand(static_cast<unsigned int>(time(0))); //seed board RNG
   char choice;
-  do {
+  do { //run game at least once, do while for continuity 
     playGame();
-    cout << "Do you want to restart the game? (Y/N): ";
+    cout << "Do you want to start a new game? (Y/N): ";
     cin >> choice;
   } while (choice == 'Y' || choice == 'y');
-
-  cout << "Thanks for playing!\n";
-  return 0;
 }
 
 
