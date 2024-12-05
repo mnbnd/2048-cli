@@ -13,7 +13,7 @@ class Board {
 private:
   Node* grid[4][4]; // 4x4 grid of Node pointers
 
-  // Delete copy constructor and copy assignment operator
+ //copy constructor and copy assignment operator for rule of three compliance
   Board(const Board&) = delete;
   Board& operator=(const Board&) = delete;
 
@@ -29,16 +29,14 @@ public:
   bool hasWon();
 };
 
-// Implementation of Board class methods
-
 Board::Board() {
-  // Initialize the grid with Nodes
+  // fill the grid with nodes
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 4; j++) {
       grid[i][j] = new Node();
     }
   }
-  // Set up the pointers
+  //initialize pointers if they exist, otherwise keep it null
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 4; j++) {
       if (i > 0)
@@ -63,7 +61,7 @@ Board::Board() {
 }
 
 Board::~Board() {
-  // Delete all Nodes
+  // Delete all nodes. Destructor
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 4; j++) {
       delete grid[i][j];
@@ -72,13 +70,12 @@ Board::~Board() {
 }
 
 void Board::initialize() {
-  // Add two initial tiles
-  addRandomTile();
+  //always 2 new tiles
+  addRandomTile(); 
   addRandomTile();
 }
 
 void Board::printBoard() {
-  // Print the board to the console
   cout << "-------------------------\n";
   for (int i = 0; i < 4; i++) {
     cout << "|";
@@ -129,9 +126,12 @@ void Board::addRandomTile() {
 }
 
 bool Board::move(char direction) {
+  //bools that see if tile has moved/merged
   bool moved = false;
   bool merged[4][4] = { false };
 
+
+  // the code of each of these is the same, but with directions flipped for each cardinal direction.
   switch (direction) {
     //up
     case 'w':
