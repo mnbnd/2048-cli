@@ -18,13 +18,13 @@ private:
   Board& operator=(const Board&) = delete;
 
 public:
-  Board();
-  ~Board();
-  void initialize();
-  void printBoard();
-  void addRandomTile();
+  Board(); //constructor
+  ~Board(); //destructor
+  void initialize(); //adds two tiles to board
+  void printBoard(); //prints out board
+  void addRandomTile(); 
   bool move(char direction);
-  bool canMove();
+  bool canMove(); 
   bool isGameOver();
   bool hasWon();
 };
