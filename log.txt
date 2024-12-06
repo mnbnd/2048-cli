@@ -42,3 +42,45 @@ The hardest part of this was the logic used to scan each row. I had a hard time 
 10 minutes - consult with John on progress, talk about what we needed to finish
 
 30 minutes - review final program with John and comment out stuff, fix formatting
+
+
+John
+
+1 hr: Initial meeting, 2048 was chosen as project and there was a high level discussion about potential implementations, data structures, etc.
+45min-1hr: Researching the game to understand the problems that would need to be solved. This included reviewing similar problems that had been
+    previously solved in labs or class, as well as simply playing the game and thinking about the logic required to make it work. 
+    
+1hr: Coordinating with Jacob to understand program structure in order to implement board class.
+30min: implement constructor, deconstructor, and initialize() for board class
+45min: implement main.cpp and game loop having now understood the class
+1hr: excerpt from addRandomTile() function: 
+
+
+      int r = rand() % emptyCells;
+        int count = 0;
+        for (int i = 0; i < 4; i++) {
+          for (int j = 0; j < 4; j++) { // for each cell
+            if (grid[i][j]->value == 0) { // if cell is empty
+              if (count == r) { // and we've reached the randomly selected empty cell
+                int randValue = rand() % 10; // theres a 10% chance of 4, and a 90% chance of 2 being generated
+                if (randValue == 0) {
+                  grid[i][j]->value = 4;
+                } else {
+                  grid[i][j]->value = 2;
+                }
+                return;
+              }
+              count++;
+            }
+          }
+        }
+Explanation:
+    I struggled here at first, because i was pretty confident in my ability to select a random number (either 2 or 4) but the idea of selecting 
+    a random tile in the board kind of spun my head in circles. Once I drew the structure out on a piece of paper though, it became much easier
+    to devise a strategy, and I settled on this implementation: the number of empty tiles are counted, and then a random number between 0 and
+    (numOfEmptyTiles - 1) is selected. this is basically our "index" if we were to view every empty tile as a 1D list instead of a 2D board. Now once
+    we've counted through the "list" (board) and we've reached our "index," all we have to do is pick that 2 or 4 to spawn inside the tile.
+
+45min: Spent this time writing smaller functions, and adding finishing touches to my work. 
+45min: final wrap up meeting. Comments, readability, more descriptive headers, and anything else that had previously gone unnoticed/unfinished
+    was addressed and the project was tested. 
